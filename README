@@ -1,0 +1,60 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2760
+
+This lightweight plugin provides a Vim command-line interface to the TortoiseSVN, utilizing the automation commands provided by TortoiseProc.exe. 
+
+It also simplifies the interface such that the commands are shorter to type, and  you can make use of the Vim command-line completion on both the options as well as command names to make entering quicker. 
+
+TortoiseSVN is only supported on windows, and so this plugin will work only on windows. I have been using this plugin for over a couple of years now, and refactored it recently to be more robust such that I can release it to the public. I currently use Vim 7.2 and TortoiseSVN 1.6.2 and the plugin works very well. It might work equally well on other versions, but YMMV.
+
+Here is the complete description from the script header:
+Description:
+  The plugin essentially works as a wrapper on top of the TortoiseProc and
+  provides the following functionality:
+    - Simplify command-line syntax that TortoiseProc supports.
+      - Avoid specifying /command: and /path: prefixes and use less ambiguous
+        "-" as prefix instead of "/" (customizable).
+      - Allow multiple paths as space separated arguments, instead of having
+        to use the less convenient "*" as the separator.
+    - Add command-line completion to make it easier to type the commands.
+    - Allow filename special characters on command-line, such as % and #10.
+    - Make sure the paths are acceptable to TortoiseProc.
+      - Make sure paths have back-slashes, even if 'shellslash' is currently
+        set.
+      - Convert relative paths to absolute paths.
+    - Support some aliases to the commands, such as submit->commit,
+      filelog->log, browse->repobrowser, status->repostatus
+                                                                                  
+Usage:
+  General Syntax:
+    SVN [-option[:value] ...] <command> [-option[:value] ...] [path ...]
+                                                                                  
+  Ex:
+    SVN -startrev:11000 -endrev:10000 log %
+    SVN -log:just\ testing commit % # #10
+    SVN update .
+    SVN diff % ../other/%
+                                                                                  
+Completion:
+  Use command-line completion for <command> name, options and <paths>. The
+  completion also works for |cmdline-special| characters.
+                                                                                  
+  For command names and their options refer to:
+                                                                                  
+    http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-automation.html
+                                                                                  
+Settings:
+- Set g:Tortoise_Path to the location of TortoiseProc.exe (use dos short
+  names if the path has spaces).
+                                                                                  
+- You may use g:Tortoise_CloseOnEnd_Arg to set the "closeonend" value.
+  Defaults to "2".
+                                                                                  
+- You may set g:Tortoise_UseAbsolutePaths to 1 if you want to pass absolute
+  paths to TortoiseSVN.
+                                                                                  
+- Set g:Tortoise_OptionPrefix to "/" if you prefer the native TortoiseProc
+  command syntax.
+                                                                                  
+- Set g:Tortoise_OptionCompleteSuffixColon to "0" to avoid seeing ":" at the
+  end of options.
+
